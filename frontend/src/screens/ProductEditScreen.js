@@ -1,7 +1,15 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Button, Row, Col, Carousel, Image } from 'react-bootstrap';
+import {
+  Form,
+  Button,
+  Row,
+  Col,
+  Carousel,
+  Image,
+  Dropdown,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -66,6 +74,7 @@ const ProductEditScreen = ({ match, history }) => {
     } else {
       if (!product.name || product._id !== productId) {
         dispatch(listProductDetails(productId));
+        dispatch(listProductCategories());
       } else {
         setName(product.name);
         setPrice(product.price);
@@ -79,18 +88,7 @@ const ProductEditScreen = ({ match, history }) => {
         setImagesArray(product.images);
       }
     }
-    if (!categories.parent) {
-      dispatch(listProductCategories());
-    }
-  }, [
-    dispatch,
-    history,
-    productId,
-    product,
-    successUpdate,
-    userInfo,
-    categories,
-  ]);
+  }, [dispatch, history, productId, product, successUpdate, userInfo]);
 
   /**
    * Handler for uploading images added by the user
@@ -378,7 +376,25 @@ const ProductEditScreen = ({ match, history }) => {
                         ></Form.Control>
                       </Form.Group>
                     </Col>
-                    <Col>
+                    <Col className='d-flex'>
+                      <Dropdown>
+                        <Dropdown.Toggle
+                          className='px-2 py-2'
+                          style={{ marginTop: '35px' }}
+                          id='dropdown-basic'
+                        ></Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                          {categories.parent.map((cat, index) => (
+                            <Dropdown.Item
+                              key={index}
+                              onClick={() => setCategory(cat)}
+                            >
+                              {cat}
+                            </Dropdown.Item>
+                          ))}
+                        </Dropdown.Menu>
+                      </Dropdown>
                       <Form.Group controlId='category'>
                         <Form.Label>Category</Form.Label>
                         <Form.Control
@@ -389,7 +405,24 @@ const ProductEditScreen = ({ match, history }) => {
                         ></Form.Control>
                       </Form.Group>
                     </Col>
-                    <Col>
+                    <Col className='d-flex'>
+                      <Dropdown>
+                        <Dropdown.Toggle
+                          className='px-2 py-2'
+                          style={{ marginTop: '35px' }}
+                          id='dropdown-basic'
+                        ></Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                          {categories.sub.map((subCat, index) => (
+                            <Dropdown.Item
+                              onClick={() => setSubCategory(subCat)}
+                            >
+                              {subCat}
+                            </Dropdown.Item>
+                          ))}
+                        </Dropdown.Menu>
+                      </Dropdown>
                       <Form.Group controlId='subCategory'>
                         <Form.Label>Sub-Category</Form.Label>
                         <Form.Control
