@@ -94,7 +94,6 @@ const HomeScreen = ({ match, history }) => {
           </Dropdown>
         </Col>
       </Row>
-      <Paginate pages={pages} page={page} keyword={keyword} sort={sort} />
       {loading ? (
         <Loader />
       ) : error ? (
@@ -110,6 +109,7 @@ const HomeScreen = ({ match, history }) => {
           </Row>
         </>
       )}
+      <Paginate pages={pages} page={page} keyword={keyword} sort={sort} />
     </>
   );
 };

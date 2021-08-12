@@ -298,6 +298,8 @@ const getProductCategories = asyncHandler(async (req, res) => {
         categories.sub.push(product.subCategory);
       }
     });
+    categories.parent.sort();
+    categories.sub.sort();
     res.json(categories);
   } else {
     res.status(404);

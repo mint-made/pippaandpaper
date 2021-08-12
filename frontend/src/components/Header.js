@@ -20,9 +20,24 @@ const Header = () => {
   const categoryArr = [
     {
       name: 'Cards',
-      sub: ['Birthday', 'Wedding', 'New Baby', 'Celebrate', 'All Occasions'],
+      sub: [
+        'Birthday',
+        'Wedding',
+        'New Baby',
+        'New Job',
+        'Love',
+        'Anniversary',
+        'New Home',
+        'Celebrate',
+        'Miss You',
+        'Engagement',
+        'All Occasions',
+      ],
     },
-    { name: 'Prints', sub: ['Safari Animals', 'Sea Animal'] },
+    {
+      name: 'Prints',
+      sub: ['Wild Animals', 'Sea Animals', 'Wildlife', 'Pets'],
+    },
     {
       name: 'Stationery',
       sub: ['Postcards', 'Notepad', 'To Do List'],

@@ -123,6 +123,10 @@ const ProductListScreen = ({ history, match }) => {
     return string.replace(/ /g, '-').toLowerCase();
   };
 
+  const addDecimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2);
+  };
+
   return (
     <>
       <Meta title='Product List' />
@@ -234,13 +238,7 @@ const ProductListScreen = ({ history, match }) => {
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loadingCreate && <Loader />}
       {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
-      <Paginate
-        pages={pages}
-        page={page}
-        isAdmin={true}
-        sort={sort}
-        keyword={keyword}
-      />
+
       {loading ? (
         <Loader />
       ) : error ? (
@@ -273,7 +271,7 @@ const ProductListScreen = ({ history, match }) => {
                   <td>
                     <Link to={`/product/${product._id}`}>{product.name}</Link>
                   </td>
-                  <td>£{product.price}</td>
+                  <td>£{addDecimals(product.price)}</td>
                   <td>{product.category}</td>
                   <td>{product.subCategory}</td>
                   <td>
@@ -294,6 +292,13 @@ const ProductListScreen = ({ history, match }) => {
               ))}
             </tbody>
           </Table>
+          <Paginate
+            pages={pages}
+            page={page}
+            isAdmin={true}
+            sort={sort}
+            keyword={keyword}
+          />
         </>
       )}
     </>
