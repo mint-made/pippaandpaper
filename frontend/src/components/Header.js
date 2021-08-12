@@ -27,7 +27,6 @@ const Header = () => {
       name: 'Stationery',
       sub: ['Postcards', 'Notepad', 'To Do List'],
     },
-    { name: 'Totes', sub: [] },
   ];
 
   const kebabCase = (string) => {
@@ -73,6 +72,9 @@ const Header = () => {
                   ))}
                 </NavDropdown>
               ))}
+              <LinkContainer to='/shop/totes'>
+                <Nav.Link className='nav-item'>Totes</Nav.Link>
+              </LinkContainer>
               <LinkContainer to='/cart'>
                 <Nav.Link>
                   <i className='fas fa-shopping-cart'></i>

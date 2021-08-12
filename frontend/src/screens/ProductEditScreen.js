@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
-import { listProductDetails, updateProduct } from '../actions/productActions';
+import {
+  listProductCategories,
+  listProductDetails,
+  updateProduct,
+} from '../actions/productActions';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
 import Meta from '../components/Meta';
 
@@ -41,6 +45,13 @@ const ProductEditScreen = ({ match, history }) => {
     success: successUpdate,
   } = productUpdate;
 
+  const productCategories = useSelector((state) => state.productCategories);
+  const {
+    loading: loadingCategories,
+    error: errorCategories,
+    categories,
+  } = productCategories;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -68,7 +79,18 @@ const ProductEditScreen = ({ match, history }) => {
         setImagesArray(product.images);
       }
     }
-  }, [dispatch, history, productId, product, successUpdate, userInfo]);
+    if (!categories.parent) {
+      dispatch(listProductCategories());
+    }
+  }, [
+    dispatch,
+    history,
+    productId,
+    product,
+    successUpdate,
+    userInfo,
+    categories,
+  ]);
 
   /**
    * Handler for uploading images added by the user
