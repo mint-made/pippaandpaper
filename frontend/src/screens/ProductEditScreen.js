@@ -54,11 +54,7 @@ const ProductEditScreen = ({ match, history }) => {
   } = productUpdate;
 
   const productCategories = useSelector((state) => state.productCategories);
-  const {
-    loading: loadingCategories,
-    error: errorCategories,
-    categories,
-  } = productCategories;
+  const { categories } = productCategories;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -385,14 +381,15 @@ const ProductEditScreen = ({ match, history }) => {
                         ></Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                          {categories.parent.map((cat, index) => (
-                            <Dropdown.Item
-                              key={index}
-                              onClick={() => setCategory(cat)}
-                            >
-                              {cat}
-                            </Dropdown.Item>
-                          ))}
+                          {categories.parent &&
+                            categories.parent.map((cat, index) => (
+                              <Dropdown.Item
+                                key={index}
+                                onClick={() => setCategory(cat)}
+                              >
+                                {cat}
+                              </Dropdown.Item>
+                            ))}
                         </Dropdown.Menu>
                       </Dropdown>
                       <Form.Group controlId='category'>
@@ -414,13 +411,15 @@ const ProductEditScreen = ({ match, history }) => {
                         ></Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                          {categories.sub.map((subCat, index) => (
-                            <Dropdown.Item
-                              onClick={() => setSubCategory(subCat)}
-                            >
-                              {subCat}
-                            </Dropdown.Item>
-                          ))}
+                          {categories.sub &&
+                            categories.sub.map((subCat, index) => (
+                              <Dropdown.Item
+                                key={index}
+                                onClick={() => setSubCategory(subCat)}
+                              >
+                                {subCat}
+                              </Dropdown.Item>
+                            ))}
                         </Dropdown.Menu>
                       </Dropdown>
                       <Form.Group controlId='subCategory'>
