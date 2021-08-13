@@ -40,7 +40,7 @@ const Header = () => {
     },
     {
       name: 'Stationery',
-      sub: ['Postcards', 'Notepad', 'To Do List'],
+      sub: ['Postcards', 'Notepads', 'To Do Lists', 'Daily Planners'],
     },
   ];
 

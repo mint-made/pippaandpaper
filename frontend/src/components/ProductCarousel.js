@@ -16,6 +16,10 @@ const ProductCarousel = () => {
     dispatch(listTopProducts());
   }, [dispatch]);
 
+  const addDecimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2);
+  };
+
   return loading ? (
     <Loader />
   ) : error ? (
@@ -33,7 +37,7 @@ const ProductCarousel = () => {
             />
             <Carousel.Caption className='carousel-caption'>
               <h2>
-                {product.name} (£{product.price})
+                {product.name} (£{addDecimals(product.price)})
               </h2>
             </Carousel.Caption>
           </Link>
